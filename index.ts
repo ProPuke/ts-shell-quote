@@ -12,7 +12,10 @@ export type ShellCmdInputPart =
   | undefined
   | null
   | ShellCmdOp;
-export type ShellCmdPart = string | ShellCmdComment;
+export type ShellCmdPart =
+  | string
+  | ShellCmdOp
+  | ShellCmdComment;
 export type ShellEnvArg =
   | { [key: string]: string }
   | ((key: string) => string | object);
