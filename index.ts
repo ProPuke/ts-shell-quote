@@ -29,7 +29,7 @@ export function quote(xs: ShellCmdInputPart[]): string {
       }
       if (typeof s === "string") {
         if (/["\s]/.test(s) && !/'/.test(s)) {
-          return "'" + s.replace(/(['\\])/g, "\\$1") + "'";
+          return "'" + s + "'";
         } else if (/["'\s]/.test(s)) {
           return '"' + s.replace(/(["\\$`!])/g, "\\$1") + '"';
         } else {

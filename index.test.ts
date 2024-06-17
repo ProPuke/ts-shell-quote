@@ -142,6 +142,8 @@ Deno.test("glob patterns", () => {
 });
 
 Deno.test("parse shell commands", () => {
+  assertEquals(parse('"a \\" b"'), ['a " b']);
+  assertEquals(parse("'a \\\" b'"), ['a \\" b']);
   assertEquals(parse("a 'b' \"c\""), ["a", "b", "c"]);
   assertEquals(
     parse('beep "boop" \'foo bar baz\' "it\'s \\"so\\" groovy"'),
@@ -171,6 +173,8 @@ Deno.test("quote", () => {
     '\\$ \\` "\'"',
   );
   assertEquals(quote([]), "");
+  assertEquals(quote(["a '\" b"]), '"a \'\\" b"');
+  assertEquals(quote(['a \\" b']), "'a \\\" b'");
   assertEquals(quote(["a\nb"]), "'a\nb'");
   assertEquals(quote([" #(){}*|][!"]), "' #(){}*|][!'");
   assertEquals(quote(["'#(){}*|][!"]), '"\'#(){}*|][\\!"');
